@@ -175,12 +175,9 @@ public class DefaultAPIImpl implements API
         return getFriends("@me");
     }
 
-    @Override
-    public List<User> getFriends(String xidUser) throws IOException
+    private List<User> fetchFriends(String url) throws IOException
     {
-        HttpGet get = new HttpGet(String.format("%s/%s/friends",
-                URL_USERS_BASE, xidUser));
-
+        HttpGet get = new HttpGet(url);
         get.addHeader("x-nudge-token", getToken());
         HttpResponse response = client.execute(get);
         JsonNode node = jsonResponse(response);
@@ -200,6 +197,33 @@ public class DefaultAPIImpl implements API
             }
         }
         return null;
+    }
+
+    @Override
+    public List<User> getFriends(String xidUser) throws IOException
+    {
+        return fetchFriends(String.format("%s/%s/friends",
+                URL_USERS_BASE, xidUser));
+    }
+
+    @Override
+    public List<User> getMutualFriends(String xidUser) throws IOException
+    {
+        return fetchFriends(String.format("%s/%s/mutualFriends",
+                URL_USERS_BASE, xidUser));
+    }
+
+    @Override
+    public Mood getMood() throws IOException
+    {
+        return getMood("@me");
+    }
+
+    @Override
+    public Mood getMood(String xidUser) throws IOException
+    {
+        return getSingleDataItem(String.format("%s/%s/mood",
+                URL_USERS_BASE, xidUser), Mood.class);
     }
 
     @Override

@@ -68,6 +68,14 @@ public interface API
     List<User> getFriends(String xidUser) throws IOException;
 
     /**
+     * @param xidUser
+     * @return the mutual friends between the authenticated user and the user
+     * with the given xid
+     * @throws IOException
+     */
+    List<User> getMutualFriends(String xidUser) throws IOException;
+
+    /**
      * @return the currently authenticated users' score
      * @throws IOException
      */
@@ -247,4 +255,18 @@ public interface API
      * @return
      */
     List<TimeSlice> getSleepSnapshot(String xid) throws IOException;
+
+    /**
+     *
+     * @return @throws IOException
+     */
+    Mood getMood() throws IOException;
+
+    /**
+     *
+     * @param xidUser
+     * @return
+     * @throws IOException
+     */
+    Mood getMood(String xidUser) throws IOException;
 }
