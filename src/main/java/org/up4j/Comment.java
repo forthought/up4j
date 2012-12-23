@@ -15,8 +15,9 @@
  */
 package org.up4j;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Date;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  *
@@ -30,6 +31,7 @@ public class Comment
     @JsonProperty("comment")
     private String comment;
 
+    @JsonDeserialize(using = JsonUtils.EpochSecondsDateDeserializer.class)
     @JsonProperty("time_created")
     private Date created;
 

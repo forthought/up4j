@@ -15,30 +15,18 @@
  */
 package org.up4j;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.util.Date;
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.DeserializationContext;
-import org.codehaus.jackson.map.JsonDeserializer;
-import org.codehaus.jackson.map.JsonSerializer;
-import org.codehaus.jackson.map.SerializerProvider;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
  *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Settings
+public class UserSettings
 {
-    //    "time_removed", "text_1", "mail_opts", "data_2", "data_1", "flags", "goals"
-
     private Integer uid;
 
     private String xid;
@@ -63,16 +51,16 @@ public class Settings
     private String bandName;
 
     @JsonProperty("share_move")
-    private Boolean shareMove;
+    private boolean shareMove;
 
     @JsonProperty("share_sleep")
-    private Boolean shareSleep;
+    private boolean shareSleep;
 
     @JsonProperty("share_eat")
-    private Boolean shareEat;
+    private boolean shareEat;
 
     @JsonProperty("share_mood")
-    private Boolean shareMood;
+    private boolean shareMood;
 
     @JsonProperty("birth_day")
     private Integer birthDay;
@@ -90,8 +78,21 @@ public class Settings
     @JsonProperty("profile_privacy")
     private String profilePrivacy;
 
+    @JsonDeserialize(using = JsonUtils.EpochSecondsDateDeserializer.class)
     @JsonProperty("time_created")
     private Date created;
+
+    @JsonProperty("data_1")
+    private Integer data1;
+
+    @JsonProperty("data_2")
+    private Integer data2;
+
+    @JsonProperty("flags")
+    private Integer flags;
+
+    @JsonProperty("text_1")
+    private String text1;
 
     @JsonProperty("up_goals")
     private Goals goals;
@@ -102,7 +103,7 @@ public class Settings
     @JsonProperty("basic_info")
     private BasicInfo basicInfo;
 
-    @JsonProperty("smart_alartm")
+    @JsonProperty("smart_alarm")
     private SmartAlarm smartAlarm;
 
     @JsonProperty("power_nap")
@@ -173,6 +174,38 @@ public class Settings
     }
 
     /**
+     * @return the first
+     */
+    public String getFirst()
+    {
+        return first;
+    }
+
+    /**
+     * @param first the first to set
+     */
+    public void setFirst(String first)
+    {
+        this.first = first;
+    }
+
+    /**
+     * @return the last
+     */
+    public String getLast()
+    {
+        return last;
+    }
+
+    /**
+     * @param last the last to set
+     */
+    public void setLast(String last)
+    {
+        this.last = last;
+    }
+
+    /**
      * @return the name
      */
     public String getName()
@@ -205,6 +238,22 @@ public class Settings
     }
 
     /**
+     * @return the type
+     */
+    public Integer getType()
+    {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(Integer type)
+    {
+        this.type = type;
+    }
+
+    /**
      * @return the bandName
      */
     public String getBandName()
@@ -223,15 +272,15 @@ public class Settings
     /**
      * @return the shareMove
      */
-    public Boolean isShareMove()
+    public boolean isShareMove()
     {
-        return getShareMove();
+        return shareMove;
     }
 
     /**
      * @param shareMove the shareMove to set
      */
-    public void setShareMove(Boolean shareMove)
+    public void setShareMove(boolean shareMove)
     {
         this.shareMove = shareMove;
     }
@@ -239,15 +288,15 @@ public class Settings
     /**
      * @return the shareSleep
      */
-    public Boolean isShareSleep()
+    public boolean isShareSleep()
     {
-        return getShareSleep();
+        return shareSleep;
     }
 
     /**
      * @param shareSleep the shareSleep to set
      */
-    public void setShareSleep(Boolean shareSleep)
+    public void setShareSleep(boolean shareSleep)
     {
         this.shareSleep = shareSleep;
     }
@@ -255,15 +304,15 @@ public class Settings
     /**
      * @return the shareEat
      */
-    public Boolean isShareEat()
+    public boolean isShareEat()
     {
-        return getShareEat();
+        return shareEat;
     }
 
     /**
      * @param shareEat the shareEat to set
      */
-    public void setShareEat(Boolean shareEat)
+    public void setShareEat(boolean shareEat)
     {
         this.shareEat = shareEat;
     }
@@ -271,15 +320,15 @@ public class Settings
     /**
      * @return the shareMood
      */
-    public Boolean isShareMood()
+    public boolean isShareMood()
     {
-        return getShareMood();
+        return shareMood;
     }
 
     /**
      * @param shareMood the shareMood to set
      */
-    public void setShareMood(Boolean shareMood)
+    public void setShareMood(boolean shareMood)
     {
         this.shareMood = shareMood;
     }
@@ -365,35 +414,99 @@ public class Settings
     }
 
     /**
-     * @return the shareMove
+     * @return the profilePrivacy
      */
-    public Boolean getShareMove()
+    public String getProfilePrivacy()
     {
-        return shareMove;
+        return profilePrivacy;
     }
 
     /**
-     * @return the shareSleep
+     * @param profilePrivacy the profilePrivacy to set
      */
-    public Boolean getShareSleep()
+    public void setProfilePrivacy(String profilePrivacy)
     {
-        return shareSleep;
+        this.profilePrivacy = profilePrivacy;
     }
 
     /**
-     * @return the shareEat
+     * @return the created
      */
-    public Boolean getShareEat()
+    public Date getCreated()
     {
-        return shareEat;
+        return created;
     }
 
     /**
-     * @return the shareMood
+     * @param created the created to set
      */
-    public Boolean getShareMood()
+    public void setCreated(Date created)
     {
-        return shareMood;
+        this.created = created;
+    }
+
+    /**
+     * @return the data1
+     */
+    public Integer getData1()
+    {
+        return data1;
+    }
+
+    /**
+     * @param data1 the data1 to set
+     */
+    public void setData1(Integer data1)
+    {
+        this.data1 = data1;
+    }
+
+    /**
+     * @return the data2
+     */
+    public Integer getData2()
+    {
+        return data2;
+    }
+
+    /**
+     * @param data2 the data2 to set
+     */
+    public void setData2(Integer data2)
+    {
+        this.data2 = data2;
+    }
+
+    /**
+     * @return the flags
+     */
+    public Integer getFlags()
+    {
+        return flags;
+    }
+
+    /**
+     * @param flags the flags to set
+     */
+    public void setFlags(Integer flags)
+    {
+        this.flags = flags;
+    }
+
+    /**
+     * @return the text1
+     */
+    public String getText1()
+    {
+        return text1;
+    }
+
+    /**
+     * @param text1 the text1 to set
+     */
+    public void setText1(String text1)
+    {
+        this.text1 = text1;
     }
 
     /**
@@ -426,70 +539,6 @@ public class Settings
     public void setActiveAlert(ActiveAlert activeAlert)
     {
         this.activeAlert = activeAlert;
-    }
-
-    /**
-     * @return the first
-     */
-    public String getFirst()
-    {
-        return first;
-    }
-
-    /**
-     * @param first the first to set
-     */
-    public void setFirst(String first)
-    {
-        this.first = first;
-    }
-
-    /**
-     * @return the last
-     */
-    public String getLast()
-    {
-        return last;
-    }
-
-    /**
-     * @param last the last to set
-     */
-    public void setLast(String last)
-    {
-        this.last = last;
-    }
-
-    /**
-     * @return the profilePrivacy
-     */
-    public String getProfilePrivacy()
-    {
-        return profilePrivacy;
-    }
-
-    /**
-     * @param profilePrivacy the profilePrivacy to set
-     */
-    public void setProfilePrivacy(String profilePrivacy)
-    {
-        this.profilePrivacy = profilePrivacy;
-    }
-
-    /**
-     * @return the created
-     */
-    public Date getCreated()
-    {
-        return created;
-    }
-
-    /**
-     * @param created the created to set
-     */
-    public void setCreated(Date created)
-    {
-        this.created = created;
     }
 
     /**
@@ -540,74 +589,27 @@ public class Settings
         this.powerNap = powerNap;
     }
 
-    /**
-     * @return the type
-     */
-    public Integer getType()
-    {
-        return type;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(Integer type)
-    {
-        this.type = type;
-    }
-
-    private static class DateSerializer extends JsonSerializer<Date>
-    {
-
-        @Override
-        public void serialize(Date d, JsonGenerator jg, SerializerProvider sp) throws
-                IOException, JsonProcessingException
-        {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String formattedDate = formatter.format(d);
-            jg.writeString(formattedDate);
-        }
-    }
-
-    private static class DateDeserializer extends JsonDeserializer<Date>
-    {
-
-        @Override
-        public Date deserialize(JsonParser jp, DeserializationContext dc) throws
-                IOException, JsonProcessingException
-        {
-            try
-            {
-                String value = jp.getText();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                return formatter.parse(value);
-            }
-            catch (ParseException ex)
-            {
-                return null;
-            }
-        }
-    }
-
     public static class BasicInfo
     {
 
         private Double weight;
 
         @JsonProperty("dob")
-        @JsonSerialize(using = DateSerializer.class)
-        @JsonDeserialize(using = DateDeserializer.class)
+        @JsonSerialize(using = JsonUtils.ISO8601DateSerializer.class)
+        @JsonDeserialize(using = JsonUtils.ISO8601DateDeserializer.class)
         private Date birthDate;
 
-        private String gender;
+        private Gender gender = Gender.Female;
 
-        private Integer metric;
+        @JsonSerialize(using = JsonUtils.BooleanAsIntegerSerializer.class)
+        private boolean metric;
 
         private Double height;
 
         private String locale;
 
         /**
+         * @see {@link BasicInfo#setWeight(java.lang.Double) }
          * @return the weight
          */
         public Double getWeight()
@@ -616,7 +618,7 @@ public class Settings
         }
 
         /**
-         * @param weight the weight to set
+         * @param weight the weight to set, in kg
          */
         public void setWeight(Double weight)
         {
@@ -642,7 +644,7 @@ public class Settings
         /**
          * @return the gender
          */
-        public String getGender()
+        public Gender getGender()
         {
             return gender;
         }
@@ -650,25 +652,9 @@ public class Settings
         /**
          * @param gender the gender to set
          */
-        public void setGender(String gender)
+        public void setGender(Gender gender)
         {
             this.gender = gender;
-        }
-
-        /**
-         * @return the metric
-         */
-        public Integer getMetric()
-        {
-            return metric;
-        }
-
-        /**
-         * @param metric the metric to set
-         */
-        public void setMetric(Integer metric)
-        {
-            this.metric = metric;
         }
 
         /**
@@ -701,6 +687,28 @@ public class Settings
         public void setLocale(String locale)
         {
             this.locale = locale;
+        }
+
+        /**
+         * @return the metric
+         */
+        public boolean isMetric()
+        {
+            return metric;
+        }
+
+        /**
+         * @param metric the metric to set
+         */
+        public void setMetric(boolean metric)
+        {
+            this.metric = metric;
+        }
+
+        public static enum Gender
+        {
+
+            Male, Female
         }
     }
 

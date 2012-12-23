@@ -15,11 +15,12 @@
  */
 package org.up4j;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  *
@@ -574,9 +575,11 @@ public class Score
     public static class Mood
     {
 
+        @JsonDeserialize(using = JsonUtils.EpochSecondsDateDeserializer.class)
         @JsonProperty("time_created")
         private Date created;
 
+        @JsonDeserialize(using = JsonUtils.EpochSecondsDateDeserializer.class)
         @JsonProperty("time_updated")
         private Date updated;
 

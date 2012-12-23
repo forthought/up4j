@@ -15,7 +15,7 @@
  */
 package org.up4j;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  *
@@ -85,14 +85,14 @@ public class Goals
 
         private Integer calcium;
 
-        private Integer sodium;
-
         private Integer carbs;
 
         private Integer fiber;
 
         @JsonProperty("unsat_fat")
         private Integer unsaturatedFat;
+
+        private Integer sodium;
 
         private Integer cholesterol;
 
@@ -255,10 +255,10 @@ public class Goals
     public static class MoveGoals
     {
 
-        private Long steps;
+        private Integer steps;
 
         @JsonProperty("workout_time")
-        private Long workoutTime;
+        private Integer workoutTime;
 
         public MoveGoals()
         {
@@ -267,7 +267,7 @@ public class Goals
         /**
          * @return the steps
          */
-        public Long getSteps()
+        public Integer getSteps()
         {
             return steps;
         }
@@ -275,7 +275,7 @@ public class Goals
         /**
          * @param steps the steps to set
          */
-        public void setSteps(Long steps)
+        public void setSteps(Integer steps)
         {
             this.steps = steps;
         }
@@ -283,7 +283,7 @@ public class Goals
         /**
          * @return the workoutTime
          */
-        public Long getWorkoutTime()
+        public Integer getWorkoutTime()
         {
             return workoutTime;
         }
@@ -291,7 +291,7 @@ public class Goals
         /**
          * @param workoutTime the workoutTime to set
          */
-        public void setWorkoutTime(Long workoutTime)
+        public void setWorkoutTime(Integer workoutTime)
         {
             this.workoutTime = workoutTime;
         }
@@ -300,11 +300,11 @@ public class Goals
     public static class SleepGoals
     {
 
-        private Long total;
+        private Integer total;
 
-        private Long bedtime;
+        private Integer bedtime;
 
-        private Long deep;
+        private Integer deep;
 
         public SleepGoals()
         {
@@ -313,7 +313,7 @@ public class Goals
         /**
          * @return the total
          */
-        public Long getTotal()
+        public Integer getTotal()
         {
             return total;
         }
@@ -321,7 +321,7 @@ public class Goals
         /**
          * @param total the total to set
          */
-        public void setTotal(Long total)
+        public void setTotal(Integer total)
         {
             this.total = total;
         }
@@ -329,7 +329,7 @@ public class Goals
         /**
          * @return the bedtime
          */
-        public Long getBedtime()
+        public Integer getBedtime()
         {
             return bedtime;
         }
@@ -337,7 +337,7 @@ public class Goals
         /**
          * @param bedtime the bedtime to set
          */
-        public void setBedtime(Long bedtime)
+        public void setBedtime(Integer bedtime)
         {
             this.bedtime = bedtime;
         }
@@ -345,7 +345,7 @@ public class Goals
         /**
          * @return the deep
          */
-        public Long getDeep()
+        public Integer getDeep()
         {
             return deep;
         }
@@ -353,7 +353,7 @@ public class Goals
         /**
          * @param deep the deep to set
          */
-        public void setDeep(Long deep)
+        public void setDeep(Integer deep)
         {
             this.deep = deep;
         }
